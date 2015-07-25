@@ -1,0 +1,47 @@
+#include <iostream>
+
+void mergeSortedArrays(int arr1[], const int arr2[], int num1, int num2);
+
+int main(int argc, char* argv[]){
+	int arr1[10];
+	arr1[0] = 1;
+	arr1[1] = 4;
+	arr1[2] = 8;
+	arr1[3] = 12;
+	arr1[4] = 13;
+
+	int arr2[] = {3, 5, 9, 10 15};
+
+	mergeSortedArrays(arr1, arr2, 5, 5);
+
+	for(int i=0; i<10; i++){
+		std::cout << arr1[i] << " ";
+	}
+	std::cout << std::endl;
+
+	return 0;	
+}
+
+void mergeSortedArrays(int arr1[], const int arr2[], int num1, int num2){
+	// move the contents in A to the back end of the array
+	for(int i=0; i<num1; i++){
+		arr1[i+num2] = arr[i];
+	}
+
+	int arr1Index = num2, arr2Index = 0;
+	// loop through to insert next lowest into arr1 one at a time
+	for(int i=0; i<num1+num2; i++){
+		// compare the values in the first and second array
+		// get from first array if no more in second or first array has smaller value
+		if(arr2Index == num2 || (arr1Index != num1 + num2 && arr1[arr1Index] < arr2[arr2Index])){
+			arr1[i] = arr1[arr1Index];
+			arr1Index++;
+		}
+		// get from second array first is full and second is not full, or second array has smaller or equal value
+		else{
+			arr1[i] = arr2[arr2Index];
+			arr2Index++;
+		}
+
+	}
+}

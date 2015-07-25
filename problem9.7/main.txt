@@ -1,0 +1,55 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <vector>
+#include <algorithm>
+
+struct person{
+	int height, weight;
+};
+
+int largestNum(std::vector<person> people);
+bool comparePerson(const person& p1, const person& p2);
+
+int main(int argc, char* argv[]){
+
+	std::srand(std::time(NULL));
+
+	std::vector<person> people;
+
+	person p;
+
+	for(int i=0; i<5; i++){
+		p.height = (rand()%50) + 50;
+		p.weight = (rand()%100) + 100;
+		people.push_back(p);
+		std::cout << "height: " << p.height << " weight: " << p.weight << std::endl;
+	}
+
+	std::sort(people.begin(), people.end(), &comparePerson);
+
+	for(int i=0; i<people.size(); i++){
+		std::cout << people[i].height << " " << people[i].weight << std::endl;
+	}
+
+	return 0;
+}
+
+int largestNum(std::vector<person> people){
+	
+}
+
+bool comparePerson(const person& p1, const person& p2){
+	if(p1.height <= p2.height){
+		if(p1.height == p2.height){
+			if(p1.weight <= p2.weight)
+				return true;
+			else
+				return false;
+		}
+		else
+			return true;
+	}
+	else
+		return false;
+}
